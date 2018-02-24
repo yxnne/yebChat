@@ -1,6 +1,6 @@
 import React from 'react';
 import Logo from '../../component/logo/logo';
-import { List, Radio, InputItem, WingBlank, WhiteSpace, Button } from 'antd-mobile';
+import { List, Radio, InputItem, WhiteSpace, Button } from 'antd-mobile';
 
 const RadioItem = Radio.RadioItem;
 
@@ -26,8 +26,8 @@ class Register extends React.Component{
     			<WhiteSpace />
     			<InputItem>确认密码</InputItem>
     			<WhiteSpace />
-    			<RadioItem checked={this.state.type=='g'}>G</RadioItem>
-    			<RadioItem checked={this.state.type=='b'}>B</RadioItem>
+    			<RadioItem checked={this.state.type==='g'}>G</RadioItem>
+    			<RadioItem checked={this.state.type==='b'}>B</RadioItem>
   			</List>
   			<Button type="primary">注册</Button>
 			</div>

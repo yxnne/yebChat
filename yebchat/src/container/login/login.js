@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, InputItem, WingBlank, WhiteSpace, Button } from 'antd-mobile';
+import { List, InputItem, WhiteSpace, Button } from 'antd-mobile';
 import Logo from '../../component/logo/logo';
 class Login extends React.Component{
 
@@ -30,7 +30,7 @@ class Login extends React.Component{
     		<Button type="primary" onClick={this.register}>注册</Button>
 			</div>
     );
-      
+
   }
 }
 
