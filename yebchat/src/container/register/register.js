@@ -9,10 +9,29 @@ class Register extends React.Component{
 	constructor(){
 		super();
 		this.state = {
+			user:'',
+			pwd:'',
+			repeatPwd:'',
 			type:'g' // user type
 		};
 
+		this.handleChange = this.handleChange.bind(this);
+		this.handleRegister = this.handleRegister.bind(this);
 	}
+
+	// 输入控件
+	handleChange(key, value){
+		this.setState({
+			// 注意这个中括号
+			[key]:value
+		});
+	}
+
+	// 点击注册按钮处理逻辑
+	handleRegister(){
+		console.log(this.state);
+	}
+
   render(){
 
     return (
@@ -21,16 +40,25 @@ class Register extends React.Component{
     		<h2>注册页面(Temp Mark)</h2>
 				<WingBlank>
 	    		<List>
-	    			<InputItem>用户</InputItem>
+						{/* user name */}
+	    			<InputItem onChange={v => this.handleChange('user',v)}>用户</InputItem>
 	    			<WhiteSpace />
-	    			<InputItem>密码</InputItem>
+
+						{/* password */}
+	    			<InputItem type="password" onChange={v => this.handleChange('pwd',v)}>密码</InputItem>
 	    			<WhiteSpace />
-	    			<InputItem>确认密码</InputItem>
+	    			<InputItem type="password" onChange={v => this.handleChange('repeatPwd',v)}>确认密码</InputItem>
 	    			<WhiteSpace />
-	    			<RadioItem checked={this.state.type==='g'}>G</RadioItem>
-	    			<RadioItem checked={this.state.type==='b'}>B</RadioItem>
+
+						{/* radio */}
+	    			<RadioItem checked={this.state.type==='g'}
+							onChange={v => this.handleChange('type','g')}>G</RadioItem>
+	    			<RadioItem checked={this.state.type==='b'}
+							onChange={v => this.handleChange('type','b')}>B</RadioItem>
 	  			</List>
-	  			<Button type="primary">注册</Button>
+
+					{/* submit */}
+	  			<Button type="primary" onClick={v => this.handleRegister()}>注册</Button>
 			</WingBlank>
 			</div>
     );
