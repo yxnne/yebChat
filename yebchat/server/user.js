@@ -1,6 +1,7 @@
 const express = require('express');
 const Router = express.Router();
 const models = require('./model');
+const utility = require('utility');
 
 // 得到User记录集
 const User = models.getModel('user');
@@ -22,7 +23,8 @@ Router.post('/register', function(req, rsp){
 			return rsp.json({code:1, msg:'用户已经存在'});
 		}
 		// 查不到就是合法的
-		User.create({user:user, pwd:pwd, type:type}, function(err, doc){
+		// 密码加密了
+		User.create({user:user, pwd:md5Pwd(pwd), type:type}, function(err, doc){
 			if (err) {
 				return rsp.json({code:1, msg:'后台错误'});
 			}
@@ -36,5 +38,12 @@ Router.post('/register', function(req, rsp){
 Router.get('/info', (req, rsp) =>{
 	return rsp.json({code:1});
 });
+
+// 工具方法，密文增加复杂度，放置彩虹表暴力破解
+// 两层MD5加加盐
+function md5Pwd(pwd){
+	const salt = 'ybchat_is_good_#@~~6868!';
+	return utility.md5(utility.md5(pwd + salt));
+}
 
 module.exports = Router;

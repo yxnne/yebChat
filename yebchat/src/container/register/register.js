@@ -2,6 +2,7 @@ import React from 'react';
 import Logo from '../../component/logo/logo';
 import { List, Radio, InputItem, WingBlank, WhiteSpace, Button } from 'antd-mobile';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { register } from '../../redux/user.redux'
 
 const RadioItem = Radio.RadioItem;
@@ -43,6 +44,7 @@ class Register extends React.Component{
 
     return (
     	<div>
+				{ this.props.redirectTo?<Redirect to={this.props.redirectTo}></Redirect>:null}
     		<Logo />
     		<h2>注册页面(Temp Mark)</h2>
 				<WingBlank>
