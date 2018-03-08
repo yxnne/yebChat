@@ -46,7 +46,7 @@ class Register extends React.Component{
     	<div>
 				{ this.props.redirectTo?<Redirect to={this.props.redirectTo}></Redirect>:null}
     		<Logo />
-    		<h2>注册页面(Temp Mark)</h2>
+
 				<WingBlank>
 	    		<List>
 						{/* 消息显示 */}

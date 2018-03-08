@@ -2,6 +2,7 @@ import axios from 'axios';
 import { getRedirectPath } from '../util';
 
 // user 相关的 reducer
+const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 const ERROR_MSG = 'ERROR_MSG';
 
@@ -17,6 +18,8 @@ const initState = {
 // reducer
 export function user(state=initState, action){
   switch (action.type) {
+    case LOGIN_SUCCESS:
+      return {...state, msg:'',redirectTo:getRedirectPath(action.payload), isAuth:true, ...action.payload};
     case REGISTER_SUCCESS:
       return {...state, msg:'',redirectTo:getRedirectPath(action.payload), isAuth:true, ...action.payload};
     case ERROR_MSG:
@@ -27,6 +30,10 @@ export function user(state=initState, action){
 }
 
 // Action Creator
+function loginSuccess(data){
+  return {type:LOGIN_SUCCESS, payload:data}
+}
+
 function registerSuccess(data){
   return {type:REGISTER_SUCCESS, payload:data}
 }
@@ -35,6 +42,26 @@ function errorMsg(msg){
   return {type:ERROR_MSG, msg:msg}
 }
 
+// 对外暴露:Login
+export function login({user, pwd}, action){
+  // 校验不通过情况
+  if(!user || !pwd ){
+    return errorMsg("用户名或者密码不能为空");
+  }
+  // 校验通过
+  return dispatch => {
+    axios.post('/user/login', { user, pwd })
+    .then(res => {
+      if (res.status == 200 && res.data.code === 0) {
+        dispatch(loginSuccess( res.data.data ));
+      } else {
+        dispatch(errorMsg(res.data.msg));
+      }
+    });
+  };
+}
+
+// 对外暴露:register
 export function register({user, pwd, repeatPwd, type}, action){
 
   // 校验不通过情况
@@ -54,6 +81,6 @@ export function register({user, pwd, repeatPwd, type}, action){
         dispatch(errorMsg(res.data.msg));
       }
     });
-  }
+  };
 
 }

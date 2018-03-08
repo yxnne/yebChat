@@ -12,7 +12,23 @@ Router.get('/list', function(req, rsp){
 	});
 });
 
-// 注册的路由
+// 登录  路由
+Router.post('/login', function(req, rsp){
+	console.log(req.body);
+	const { user, pwd } = req.body;
+	// 拿到post上传信息后，先查询下，因为用户名需要唯一的
+	// 第一个参数是查询条件，第二个参数返回时不显示的字段
+	User.findOne({user:user, pwd:md5Pwd(pwd)}, {'pwd':0}, function(err, doc){
+		// doc不为空那么就是说存在这个用户名
+		if (!doc) {
+			return rsp.json({code:1, msg:'用户名或密码错误'});
+		}
+		return rsp.json({code:0, data:doc});
+
+	});
+});
+
+// 注册  路由
 Router.post('/register', function(req, rsp){
 	console.log(req.body);
 	const { user, pwd, type } = req.body;
