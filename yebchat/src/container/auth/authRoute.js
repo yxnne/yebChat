@@ -22,7 +22,7 @@ class AuthRoute extends React.Component{
 
 	render(){
 		return (
-			<h1>验证页面</h1>
+			null
 		);
 	}
 }
