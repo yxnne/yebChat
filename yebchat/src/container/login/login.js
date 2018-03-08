@@ -1,6 +1,8 @@
 import React from 'react';
 import { List, InputItem, WingBlank, WhiteSpace, Button } from 'antd-mobile';
 import Logo from '../../component/logo/logo';
+
+
 class Login extends React.Component{
 
 	constructor(){

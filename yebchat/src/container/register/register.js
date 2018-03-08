@@ -1,9 +1,15 @@
 import React from 'react';
 import Logo from '../../component/logo/logo';
 import { List, Radio, InputItem, WingBlank, WhiteSpace, Button } from 'antd-mobile';
+import { connect } from 'react-redux';
+import { register } from '../../redux/user.redux'
 
 const RadioItem = Radio.RadioItem;
 
+@connect(
+	state => state.user,
+	{ register }
+)
 class Register extends React.Component{
 
 	constructor(){
@@ -19,7 +25,7 @@ class Register extends React.Component{
 		this.handleRegister = this.handleRegister.bind(this);
 	}
 
-	// 输入控件
+	// 输入控件事件
 	handleChange(key, value){
 		this.setState({
 			// 注意这个中括号
@@ -30,6 +36,7 @@ class Register extends React.Component{
 	// 点击注册按钮处理逻辑
 	handleRegister(){
 		console.log(this.state);
+		this.props.register(this.state);
 	}
 
   render(){
@@ -40,6 +47,8 @@ class Register extends React.Component{
     		<h2>注册页面(Temp Mark)</h2>
 				<WingBlank>
 	    		<List>
+						{/* 消息显示 */}
+						{ this.props.msg ? <p className='error-msg'>{this.props.msg}</p> : null }
 						{/* user name */}
 	    			<InputItem onChange={v => this.handleChange('user',v)}>用户</InputItem>
 	    			<WhiteSpace />
@@ -58,6 +67,7 @@ class Register extends React.Component{
 	  			</List>
 
 					{/* submit */}
+					<WhiteSpace />
 	  			<Button type="primary" onClick={v => this.handleRegister()}>注册</Button>
 			</WingBlank>
 			</div>

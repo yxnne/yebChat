@@ -7,6 +7,8 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 import reducers from './reducers';
 import './config';
+import './index.css';
+
 //页面组件引入
 import Login from './container/login/login';
 import Register from './container/register/register';
