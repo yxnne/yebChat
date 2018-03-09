@@ -1,10 +1,15 @@
 import React from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
+import { loadData } from '../../redux/user.redux';
+import { connect } from 'react-redux';
 
 @withRouter
+@connect(
+	null,
+	{ loadData }
+)
 class AuthRoute extends React.Component{
-
 
 	componentDidMount(){
 		// 获取当前页面的路由地址
@@ -23,6 +28,9 @@ class AuthRoute extends React.Component{
 
 				if (res.data.code == 0 ) {
 					// 有登录信息
+					// 设置信息到redux中
+					this.props.loadData(res.data.data);
+
 				} else {
 					this.props.history.push('/login');
 				}
