@@ -1,15 +1,31 @@
 import React from 'react';
 import axios from 'axios';
+import { withRouter } from 'react-router-dom';
 
+@withRouter
 class AuthRoute extends React.Component{
 
 
 	componentDidMount(){
+		// 获取当前页面的路由地址
+		// 如果是/login 或者 /register中的一个, 不进行处理
+		// 否则先去后台验证用户
+		const publicList = ['/login', '/register'];
+		const pathname = this.props.location.pathname;
+		if (publicList.indexOf(pathname) > -1 ) {
+			return null;
+		}
+
 		// 获取登录信息
 		axios.get('user/info')
 		.then(res =>{
 			if (res.status === 200){
-				console.log(res.data);
+
+				if (res.data.code == 0 ) {
+					// 有登录信息
+				} else {
+					this.props.history.push('/login');
+				}
 			}
 		});
 		// 是否登录
