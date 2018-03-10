@@ -12,7 +12,23 @@ Router.get('/list', function(req, rsp){
 		return rsp.json(doc);
 	});
 });
-
+// 更新  路由
+Router.post('/update', function(req, rsp){
+	const userid = req.cookies.userid;
+	if (!userid){
+		return rsp.json({code:1});
+	}
+	const body = req.body;
+	User.findByIdAndUpdate(userid, body, function(err, doc){
+		// 类似展开 ...
+		const data = Object.assign({}, {
+			user:doc.user,
+			type:doc.type
+		}, body);
+		// 返回
+		return rsp.json({code:0, data});
+	});
+})
 // 登录  路由
 Router.post('/login', function(req, rsp){
 	console.log(req.body);

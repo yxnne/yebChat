@@ -14,6 +14,7 @@ import AuthRoute from './container/auth/authRoute';
 import Login from './container/login/login';
 import Register from './container/register/register';
 import BInfo from './container/binfo/binfo';
+import GInfo from './container/ginfo/ginfo';
 
 
 
@@ -30,6 +31,7 @@ ReactDOM.render(
           <Route path='/login' component={Login}></Route>
           <Route path='/register' component={Register}></Route>
           <Route path='/binfo' component={BInfo}></Route>
+          <Route path='/ginfo' component={GInfo}></Route>
         </div>
 			</BrowserRouter>
 		</Provider>

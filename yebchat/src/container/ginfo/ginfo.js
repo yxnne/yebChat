@@ -9,14 +9,12 @@ import { Redirect } from 'react-router';
   state=>state.user,
   { update }
 )
-class BInfo extends React.Component{
+class GInfo extends React.Component{
   constructor(props){
     super(props);
     this.state = {
       avatar:'',
       title:'',
-      company:'',
-      money:'',
       desc:'',
     };
   }
@@ -40,11 +38,9 @@ class BInfo extends React.Component{
     return (
       <div>
         {redirectTo && path !== redirectTo ? <Redirect to={this.props.redirectTo}/>:null}
-        <NavBar mode="dark" >B Info ？</NavBar> {/* 只是一个简单的页面头*/}
+        <NavBar mode="dark" >G Info ？</NavBar> {/* 只是一个简单的页面头*/}
         <AvatarSelector selectedAvatar={this.getSelectedAvatar.bind(this)}></AvatarSelector>
         <InputItem onChange={(val)=>this.onChange('title', val)}>Title</InputItem>
-        <InputItem onChange={(val)=>this.onChange('company', val)}>Company</InputItem>
-        <InputItem onChange={(val)=>this.onChange('money', val)}>Money</InputItem>
         <TextareaItem rows={3} autoHeight title="Desc"
           onChange={(val)=>this.onChange('desc', val)} />
         <Button onClick={()=>{
@@ -56,4 +52,4 @@ class BInfo extends React.Component{
   }
 }
 
-export default BInfo;
+export default GInfo;
