@@ -10,9 +10,11 @@ import './config';
 import './index.css';
 
 //页面组件引入
+import AuthRoute from './container/auth/authRoute';
 import Login from './container/login/login';
 import Register from './container/register/register';
-import AuthRoute from './container/auth/authRoute';
+import BInfo from './container/binfo/binfo';
+
 
 
 // redux调试工具
@@ -27,6 +29,7 @@ ReactDOM.render(
           <AuthRoute></AuthRoute>
           <Route path='/login' component={Login}></Route>
           <Route path='/register' component={Register}></Route>
+          <Route path='/binfo' component={BInfo}></Route>
         </div>
 			</BrowserRouter>
 		</Provider>

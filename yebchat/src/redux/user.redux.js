@@ -44,6 +44,8 @@ function registerSuccess(data){
 function errorMsg(msg){
   return {type:ERROR_MSG, msg:msg}
 }
+
+
 // 对外暴露一个action creator
 export function loadData(userInfo){
   return {type:LOAD_DATA, payload:userInfo}
