@@ -2,7 +2,7 @@ import React from 'react';
 import { NavBar } from 'antd-mobile';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import B from '../b/b';
+import BList from '../blist/blist';
 
 import NavLinkBar from '../navlink/navlink';
 
@@ -20,8 +20,6 @@ function Me(){
   state=>state
 )
 class Dashboard extends React.Component{
-
-
 
   render(){
     // Dashboard本来就是一个Router组件，所以不需要withRouter
@@ -42,7 +40,7 @@ class Dashboard extends React.Component{
         text:'Boss',
         icon:'job',
         title:'B List',
-        component:B,
+        component:BList,
         hide:user.type == 'b'
       },
       {
