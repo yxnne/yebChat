@@ -11,7 +11,7 @@ Router.get('/list', function(req, rsp){
 	// GET 参数使用 req.query来获得,POST 蚕食是req.body获取
 	const type = req.query.type;
 	User.find({type}, function(err, doc){
-		return rsp.json(doc);
+		return rsp.json({code:0, data:doc});
 	});
 });
 // 更新  路由
