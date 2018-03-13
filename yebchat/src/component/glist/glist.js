@@ -1,4 +1,5 @@
 import React from 'react';
+
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { getUserList } from '../../redux/chatuser.redux';
@@ -8,18 +9,14 @@ import UserCards from '../usercards/usercards';
   state=>state.chatuser ,
   { getUserList }
 )
-class BList extends React.Component{
+class GList extends React.Component{
 
   componentDidMount(){
-    // axios.get('/user/list?type=b')
-    // .then(res=>{
-    //   if (res.data.code==0) {
-    //     this.setState({data:res.data.data})
-    //   }
-    // });
-    this.props.getUserList('b');
+
+    this.props.getUserList('g');
   }
   render(){
+
     return (
 
       <UserCards userList={this.props.userList} />
@@ -28,4 +25,4 @@ class BList extends React.Component{
   }
 }
 
-export default BList;
+export default GList;

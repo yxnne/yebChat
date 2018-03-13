@@ -3,6 +3,7 @@ import { NavBar } from 'antd-mobile';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import BList from '../blist/blist';
+import GList from '../glist/glist';
 
 import NavLinkBar from '../navlink/navlink';
 
@@ -32,7 +33,7 @@ class Dashboard extends React.Component{
         text:'Genius',
         icon:'boss',
         title:'G List',
-        component:G,
+        component:GList,
         hide:user.type == 'g'
       },
       {
