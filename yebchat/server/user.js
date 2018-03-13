@@ -6,9 +6,11 @@ const _filter = {'pwd':0, '__v':0}; // 定义查询条件的过滤器
 
 // 得到User记录集
 const User = models.getModel('user');
-// 所有用户 'list'的路由
+// 用户 'list'的路由，根据Type查询类型下的用户
 Router.get('/list', function(req, rsp){
-	User.find({}, function(err, doc){
+	// GET 参数使用 req.query来获得,POST 蚕食是req.body获取
+	const type = req.query.type;
+	User.find({type}, function(err, doc){
 		return rsp.json(doc);
 	});
 });
@@ -31,7 +33,7 @@ Router.post('/update', function(req, rsp){
 })
 // 登录  路由
 Router.post('/login', function(req, rsp){
-	console.log(req.body);
+	//console.log(req.body);
 	const { user, pwd } = req.body;
 	// 拿到post上传信息后，先查询下，因为用户名需要唯一的
 	// 第一个参数是查询条件，第二个参数返回时不显示的字段
