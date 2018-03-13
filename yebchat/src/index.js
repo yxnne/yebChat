@@ -15,6 +15,7 @@ import Login from './container/login/login';
 import Register from './container/register/register';
 import BInfo from './container/binfo/binfo';
 import GInfo from './container/ginfo/ginfo';
+import Dashboard from './component/dashboard/dashboard';
 
 
 
@@ -28,10 +29,15 @@ ReactDOM.render(
 			<BrowserRouter>
         <div>
           <AuthRoute></AuthRoute>
-          <Route path='/login' component={Login}></Route>
-          <Route path='/register' component={Register}></Route>
-          <Route path='/binfo' component={BInfo}></Route>
-          <Route path='/ginfo' component={GInfo}></Route>
+					<Switch>
+	          <Route path='/login' component={Login}></Route>
+	          <Route path='/register' component={Register}></Route>
+						<Route path='/binfo' component={BInfo}></Route>
+						<Route path='/ginfo' component={GInfo}></Route>
+
+						{/* Switch 中没有命中则显示DashBoard */}
+	          <Route component={Dashboard}></Route>
+					</Switch>
         </div>
 			</BrowserRouter>
 		</Provider>
