@@ -4,19 +4,14 @@ import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import BList from '../blist/blist';
 import GList from '../glist/glist';
+import Me from '../me/me';
 
 import NavLinkBar from '../navlink/navlink';
 
-
-function G(){
-  return <h2>This is G</h2>
-}
 function Msg(){
   return <h2>This is MSG</h2>
 }
-function Me(){
-  return <h2>This is Me</h2>
-}
+
 @connect(
   state=>state
 )
