@@ -4,11 +4,13 @@ import Logo from '../../component/logo/logo';
 import { login } from '../../redux/user.redux';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import FormHoc from '../../component/form-hoc/form-hoc'
 
 @connect(
 	state => state.user,
 	{ login }
 )
+@FormHoc
 class Login extends React.Component{
 
 	constructor(){
@@ -22,12 +24,12 @@ class Login extends React.Component{
 	}
 
 	// 输入控件事件
-	handleChange(key, value){
-		this.setState({
-			// 注意这个中括号
-			[key]:value
-		});
-	}
+	// handleChange(key, value){
+	// 	this.setState({
+	// 		// 注意这个中括号
+	// 		[key]:value
+	// 	});
+	// }
 
 	// 点击register按钮
 	register(){
@@ -36,7 +38,8 @@ class Login extends React.Component{
 	}
 	// 点击登录
 	handleLogin(){
-		this.props.login(this.state);
+		// this.props.login(this.state);
+		this.props.login(this.props.state);
 	}
 
   render(){
@@ -47,9 +50,9 @@ class Login extends React.Component{
 				<WingBlank>
 	    		<List>
 						{ this.props.msg?<p className="error-msg">{this.props.msg}</p>:null }
-	    			<InputItem onChange={v => this.handleChange('user',v)}>用户</InputItem>
+	    			<InputItem onChange={v => this.props.handleChange('user',v)}>用户</InputItem>
 	    			<WhiteSpace />
-	    			<InputItem type="password" onChange={v => this.handleChange('pwd',v)}>密码</InputItem>
+	    			<InputItem type="password" onChange={v => this.props.handleChange('pwd',v)}>密码</InputItem>
 	    		</List>
 	    		<WhiteSpace />
 	    		<Button type="primary" onClick={this.handleLogin}>登录</Button>
