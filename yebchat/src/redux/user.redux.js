@@ -7,6 +7,7 @@ import { getRedirectPath } from '../util';
 const ERROR_MSG = 'ERROR_MSG';
 const LOAD_DATA = 'LOAD_DATA';
 const AUTH_SUCCESS = 'AUTH_SUCCESS'; //包括了 login register 和 update成功
+const LOGOUT = 'LOGOUT'
 
 // 用户的初始状态
 const initState = {
@@ -22,6 +23,8 @@ export function user(state=initState, action){
   switch (action.type) {
     case AUTH_SUCCESS:
       return {...state, msg:'',redirectTo:getRedirectPath(action.payload), isAuth:true, ...action.payload};
+    case LOGOUT:
+      return {...initState,redirectTo:'/login'};
     case ERROR_MSG:
       return {...state, isAuth:false, msg:action.msg}
     case LOAD_DATA:
@@ -48,10 +51,13 @@ function errorMsg(msg){
   return {type:ERROR_MSG, msg:msg}
 }
 
-
 // 对外暴露一个action creator
 export function loadData(userInfo){
   return {type:LOAD_DATA, payload:userInfo}
+}
+// 对外暴露一个action creator 登出
+export function logoutSubmit(data){
+  return {type:LOGOUT};
 }
 
 // 对外暴露: 更新信息
