@@ -16,6 +16,7 @@ import Register from './container/register/register';
 import BInfo from './container/binfo/binfo';
 import GInfo from './container/ginfo/ginfo';
 import Dashboard from './component/dashboard/dashboard';
+import Chat from './component/chat/chat';
 
 
 
@@ -34,6 +35,7 @@ ReactDOM.render(
 	          <Route path='/register' component={Register}></Route>
 						<Route path='/binfo' component={BInfo}></Route>
 						<Route path='/ginfo' component={GInfo}></Route>
+						<Route path='/chat/:user' component={Chat}></Route>
 
 						{/* Switch 中没有命中则显示DashBoard */}
 	          <Route component={Dashboard}></Route>
