@@ -6,6 +6,20 @@ const _filter = {'pwd':0, '__v':0}; // 定义查询条件的过滤器
 
 // 得到User记录集
 const User = models.getModel('user');
+const Chat = models.getModel('chat');
+
+// 得到用户聊天数据
+Router.get('/getMsgList', function(req, res){
+	const user = req.cookies.userid;
+	Chat.find({}, function(err, doc){
+		if(!err){
+			// console.log('msgs is ',doc);
+			return res.json({code:0, msgs:doc});
+		}
+	});
+});
+
+
 // 用户 'list'的路由，根据Type查询类型下的用户
 Router.get('/list', function(req, rsp){
 	// GET 参数使用 req.query来获得,POST 蚕食是req.body获取
@@ -14,6 +28,7 @@ Router.get('/list', function(req, rsp){
 		return rsp.json({code:0, data:doc});
 	});
 });
+
 // 更新  路由
 Router.post('/update', function(req, rsp){
 	const userid = req.cookies.userid;
@@ -31,6 +46,7 @@ Router.post('/update', function(req, rsp){
 		return rsp.json({code:0, data});
 	});
 })
+
 // 登录  路由
 Router.post('/login', function(req, rsp){
 	//console.log(req.body);

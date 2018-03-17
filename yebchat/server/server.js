@@ -2,8 +2,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const models = require('./model');
 
-
+// 获得数据模型
+const Chat = models.getModel('chat')
 // new app
 const app = express();
 
@@ -12,14 +14,23 @@ const app = express();
 const server = require('http').Server(app);
 
 const io = require('socket.io')(server);
+
 // 监听io链接，来自客户端
 io.on('connection', function(socket){
   // console.log('user connected...' );
   // 监听 sendmsg事件
   socket.on('sendmsg', function(data){
-    console.log(data); // data 是收到的数据
+    console.log(data);
+    // data 是收到的数据
     // 将recvmsg事件和数据，广播全局
-    io.emit('recvmsg', data);
+    // io.emit('recvmsg', data);
+
+    const { from, to, msg } = data;
+    const chatid = [from, to].sort().join('_');
+    console.log('chatid is :', chatid);
+    Chat.create({chatid, from, to, content:msg}, function(err, doc){
+      io.emit('recvmsg', Object.assign({}, doc._doc));
+    });
   });
 });
 
